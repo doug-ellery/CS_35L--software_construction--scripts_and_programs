@@ -1,11 +1,16 @@
-# Assignment 3 Starter Code
+This React app is a tweaked version of the ancient Roman game, terni lapilli, called chorus lapilli. 
 
-Please refer to the directions available on the [course webpage](https://cs35l.org/assign/assign3).
+The rules are as follow: 
 
-# Action Items
-Make sure you've followed the Setup instructions before continuing. (Installing Chrome, Node.js, and Python 3.11 and above + running `./helper init`).
+Chorus lapilli is like tic-tac-toe in that players take turn placing pieces on a 3×3 board and the goal is to get three 
+pieces in a row. However, it differs from tic-tac-toe in two ways:
 
-- [ ] Complete the [Tic-Tac-Toe React tutorial](https://react.dev/learn/tutorial-tic-tac-toe) while writing down notes in `tic-tac-toe.txt`. All changes should be made in `src/App.jsx`. Use `./helper dev` to view your changes.
-- [ ] Change Tic-Tac-Toe to conform with the Chorus Lapilli rules while writing down notes in `chorus-lapilli.txt`. Use `./helper dev` to view your changes.
-- [ ] Write test cases in `test_chorus_lapilli.py` to make sure your solution works. Run these tests using `./helper test`.
-- [ ] Create a ZIP file for submission to Gradescope. Running `./helper zip` will create a ZIP file called `assign.zip`.
+  - After your first three moves, instead of adding further pieces you must instead move one of your existing pieces 
+	to an adjacent empty square. Therefore, after your third move you always occupy three squares. The move can be up, 
+	down, left, right, or diagonal.
+	- If it is your turn to move and you have three pieces on the board and one of your pieces is in the center square, 
+	your move must either win or vacate the center square.
+
+
+Note: All of the actual code that I wrote for this is found in the App.jsx file, but to run the app you need to copy 
+this entire directory then run: npm run dev, and copy/paste the host url into your browser.
