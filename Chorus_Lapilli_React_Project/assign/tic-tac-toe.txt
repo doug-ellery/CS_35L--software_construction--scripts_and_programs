@@ -1,0 +1,85 @@
+TUTORIAL STEPS
+
+Step 1:
+
+Copy and pasted the X button nine times and placed them within a fragment to create nine identical X buttons in a row.
+
+Step 2:
+
+Every group of 3 button lines I put inside of a div element, with a class name of board-row. I also numbered each button 
+in order from 1-9, which created a 3 x 3 grid of squares numbered left to right, top to bottom as 1-9.
+
+Step 3:
+
+I changed the name of the default function to be board, and then I made a smaller function called square, 
+which returns a single button with a 1 on it. Every button that I originally had in the Board function I then 
+replaced with a new Square element that I had created. This now gave me a 3 x 3 grid of buttons with 1s on them.
+
+Step 4: 
+
+I changed my Square function to now take in an argument, value, and this argument is now what will be displayed on the 
+button it returns. For every call of the Square function, I then gave it an argument of the numbers 1-9, going on order down. 
+This brought me back to the 3 x 3 grid with numbers 1-9 in them.
+
+Step 5:
+
+I added a function within my Square function to handle a click which logs "clicked!" to the console. I then used this for 
+the onClick attribute of every button, so now when I press each button, the console logs this message
+
+Step 6:
+
+Got rid of the value argument in square, as well as the value arguments in all of my calls to Square, and instead I 
+imported useState from React to create a local variable, value, whose value is still displayed on the button, but its 
+value only becomes "X" when the button is clicked.
+
+Step 7: 
+
+Next, I switched up my implementation to use an array with all of the values of the buttons, because in order to 
+know if someone won, I will need immediate access to the board values. I creates an array, squares, in the Board function which uses 
+useState, and now for the Square function, I pass it the value (which is squares[i]) and a function (which is handleClick(i))
+which properly changes the correct value in the array for the correct corresponding button that was clicked. The final effect 
+visually and interactivley is identical to step 6.
+
+Step 8:
+
+I created boolean variable called xIsNext which basically tells me whether I should fill the current button I am handling a 
+click for with an X or an O. Every time I handle a click, xIsNext is inverted, so that the buttons altrnate with X's and O's.
+To make sure that the same button doesn't get changed twice, if squares[i] for the i'th button isn't empty, I return early
+in my handlClick function. The final result is my grid getting filled with alternating X's and O's as I click different
+buttons.
+
+Step 9:
+
+I added a function that checks if there is a winner, and if there is a winner, this function return the character (X or O)
+of the winner. I return early in my handleClick function if this winner check function returns a non null value, because
+nothing should be changed if we already have a winner. I also have a status vairable that either tells me who is up Next
+or displays the winner once a winner is found. 
+
+Step 10:
+
+I changed the organization of my program so that now my default function is not longer Board (which had gotten quite lengthy)
+but instead a new function called Game, which calls board for one of its elements. Game also handles the creating of the 
+history and xIsNext variables, and a currentSquare variable, which all (except for history) get passed in to Board to be 
+used with the same logic of Board as before. Board also gets an onPlay function, which is defined in Game to update xIsNext
+add the nextSquares on to our history. The result is a game that operates like before, but now has a history being kept track
+of in the background.
+
+Step 10:
+
+I created a mapping function which uses my history array and creates a list of buttons which display which move to go to.
+The on click function for each button is to jump to the particular move that that button represents. My Game function then
+return as part of its HTML an <ol> item which is the moves list created by this mapping function, so all previous moves should
+have their own button as more moves are made. These buttons show up, however I haven't implemented my jump function, so
+nothing happens when I click them. I also get an error in the console that each child of an array needs a unique key or prop.
+To silence this error, I gave each <li> item in my moves array a key of the current move number, which is just the current
+index in the history array.
+
+Step 11:
+
+I then implemented my jump function which takes in an argument for move and sets my currentMove, which is a new variable I 
+introduced, and xIsNext variables accordingly. Additionally, I changed my handle play function so that I have a next history
+which isn't just adding to my history, but if we jumped back to a previous move, it cuts off all the moves after that move,
+and just appends to the first i moves, if we jump to the i'th move. I also made sure my currentSquares variable uses my
+currentMove variable to grab the right squares from history that we are currently at. Lastly, I cleaned up my code by making 
+xIsNext a non-state variable which works because its value depends on current move, which is already a state variable. 
+The final result is a functioning tic tac toe game against myself where I can go back to any previous state of the game, and play from there.

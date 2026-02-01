@@ -1,0 +1,45 @@
+Step 1:
+
+I started by reverting my game to the version of tic tac toe that didn't implement time travel, because this aspect will not
+be tested and is therefore just maing my program more complicated at the moment.
+
+Step 2: 
+
+Next, I knew that I was going to need a function to call when trying to move an X or O which could check if that
+was a valid move. I wrote this function to take in two parameter, the first parameter being the starting box of 
+the X/O, and the second being the desired next box. I used a switch statement to exhaust all of the possible starting
+box indeces and then handled it from there to return a boolean value of whether or not we can jump from box1 to box2.
+
+Step 3: 
+
+Next came deciding how I wanted to handle the cases where we have either 3 X's and it is X's turn, or 3 O's and it 
+is O's turn. I needed a way to count how many X's and O's there were to even know if these cases are triggered, so
+I created two state variables, numXs and numOs, which start at O and get incremented inside handleClick() everytime
+we add an X or O, respectivley. 
+
+Step 4:
+
+I then came ot the conclusion that I should make two more state variable, twoClicks, and currClick. Both of these variables 
+only come in to play when we have three of a letter and want to move one. twoClicks is an array that stores the index of 
+the starting box we clicked, and the ending box we want to go to. Meanwhile, currClick is an int, either 0 or 1, to tell the
+handleCLick function which move we are processing currentley, either the 1st click (currClick = 0 & the user is selecting 
+which character they want to move), or the 2nd click (currClick = 1 & the user is selecting the destination that want to 
+move their character to)
+
+Step 5: 
+
+After this, it was about implementing the core logic, which mainly depended on 3 factors: currClick, xIsNext, and numXs/numOs.
+There were two major cases I needed to acount for, and that was when X is next and we have 3 Xs, and the other being when O 
+is next and we have 3 Os. Within these two cases, they had their own subcases which depended on the value of currClick to see 
+what we wanted to actually do with their click. For example, if currClick = 0, we dont want to change anything about the 
+squares, instead we want to store the index that they clicked in twoCLicks[0], and then return until handleClick is called 
+again for their second click.
+
+Step 6:
+
+The last piece of logic I acounted for was the rule about the character in the middle, and I handled this at the end of the
+two main logic branches I created that I discussed above. I did this by checking if 
+squares[4] == 'O' && nextSquares[4] == 'O' && !calculateWinner(nextSquares), basically meaning that the center character 
+didn't move out, but we also didn't win. Because of this, it is an invalid move, so I just return out of the function without 
+changing squares. After implementing all of this logic, I was able to get a working game that seems to function correctly 
+after a couple of minutes of toying with it.
